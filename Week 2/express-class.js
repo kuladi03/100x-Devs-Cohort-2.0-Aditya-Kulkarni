@@ -18,6 +18,6 @@ function calculateSum(n){
 app.get('/',function(req,res) {
 	const n = req.query.n
 	const ans = calculateSum(n)
-	res.send(ans)
+	res.send("The sum of numbers is : " + ans)
 })
 app.listen(port)
