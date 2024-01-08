@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const jwtPassword = "123456";
 
 mongoose.connect(
-  "mongodb+srv://kuladi03:jwgGoAIAH78Qkiqt@cluster0.h9nvrj9.mongodb.net/",
+  "mongodb url here",
 );
 
 const User = mongoose.model("User", {
@@ -18,6 +18,7 @@ app.use(express.json());
 
 function userExists(username, password) {
   // should check in the database
+  
 }
 
 app.post("/signin", async function (req, res) {
