@@ -23,7 +23,6 @@ function App() {
 }
 
 function Appbar(){
-
   // we need to use the useNavigate() inside the BrowserROuter only
   const navigate = useNavigate();
   return (
