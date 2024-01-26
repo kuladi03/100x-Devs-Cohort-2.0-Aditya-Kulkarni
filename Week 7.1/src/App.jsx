@@ -1,10 +1,8 @@
-import { useContext, useState } from "react"
-import { CountContext } from "./context";
-import { Navigate } from "react-router-dom";
 import { BrowserRouter , Routes , useNavigate} from "react-router-dom";
+import React , {Suspense} from "react";
 import { Route } from "react-router-dom";
-const Dashboard = React.lazy(() => import("../../Week 7.1/src/components/Dashboard"))
-const Landing = React.lazy(() => import("../../Week 7.1/src/components/Landing"))
+const Dashboard = React.lazy(() => import('./components/Dashboard'))
+const Landing = React.lazy(() => import("./components/Landing"))
 
 
 function App() { 
@@ -12,11 +10,12 @@ function App() {
   // recoil, redux, Themes in mUI
   return (
     <div>
+      //Here the dashboard and Landing are asynchronous so we need to use the suspense to work it out
       <BrowserRouter>
       <Appbar/>
         <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/" element={<Landing />} />
+        <Route path="/dashboard" element={<Suspense fallback="loading.."><Dashboard /></Suspense>} />
+        <Route path="/" element={<Suspense><Landing /></Suspense>} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -24,6 +23,8 @@ function App() {
 }
 
 function Appbar(){
+
+  // we need to use the useNavigate() inside the BrowserROuter only
   const navigate = useNavigate();
   return (
     <div>
