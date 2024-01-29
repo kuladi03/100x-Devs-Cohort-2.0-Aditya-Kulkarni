@@ -1,5 +1,5 @@
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil"
-import { countAtom } from "./store/atoms/count"
+import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { countAtom, eventSelector } from "./store/atoms/count"
 
 function App() {
   return (
@@ -14,9 +14,9 @@ function App() {
 function Count(){
   return (
     <div>
-      Hi count is called
       <CountRender/>
       <Button />
+      <Check/>
     </div>
   )
 }
@@ -31,22 +31,44 @@ function CountRender(){
 }
 
 function Button(){
-  const [count , setCount] = useRecoilState(countAtom)
+  const setCount = useSetRecoilState(countAtom)
   return (
     <div>
       <button onClick={() => {
-        setCount(count+1)
+        setCount(count => count+1)
       }}>
       Increase
       </button>
       
       <button onClick={()=>{
-        setCount(count-1)
+        setCount(count => count-1)
       }}>
         Decrease
       </button>
     </div>
   )  
+}
+
+// function Check(){
+//   const count = useRecoilValue(countAtom)
+
+//   if(count % 2 == 0){
+//     return "It is Even"
+//   } 
+//   else{
+//     return "It is Odd"
+//   }
+// } 
+
+// another way using selector 
+
+function Check(){
+  const check = useRecoilValue(eventSelector)
+  return (
+    <div>
+       {check ? "It is Even" : null}
+    </div>
+  )
 }
 
 export default App
